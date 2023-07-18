@@ -7,6 +7,6 @@ import generateEmails from "./components/email-generator/emailGenerator.js";
 
 console.log("main");
 
-generatePassphrase(8, ":", true, true);
-generatePassword(8, true, true, true);
+generatePassphrase(2, ":", true, true);
+generatePassword(2, true, true, true);
 generateEmails("test");

@@ -6,6 +6,7 @@ import {
   randomNumber,
 } from "../../utils/utils.js";
 import { asciiSymbols } from "../../utils/dict.js";
+
 /**
  *
  * @param charLen Length of desired password in chars
@@ -26,9 +27,7 @@ const generatePassword = function (
   const minLength = 5;
 
   if (charLen < minLength || charLen > maxLength) {
-    throw new Error(
-      `Password length should be between: ${minLength} & ${maxLength}`
-    );
+    throw new Error("Password length must be between 5 and 50 chars");
   }
   if (inclNumber) {
     const nums = asciiSymbols.numberChars;
@@ -84,9 +83,9 @@ const generatePassword = function (
   asciiPass.forEach((e) => {
     finalPass.push(String.fromCharCode(e));
   });
-  const passwd = finalPass.join("");
-  // console.log("password: ", passwd);
-  return passwd;
+  const password = finalPass.join("");
+  // console.log("password: ", password);
+  return password;
 };
 
 export default generatePassword;

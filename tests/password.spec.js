@@ -1,6 +1,7 @@
 import { assert, expect } from "chai";
 import generatePassword from "../components/password-generator/passwordGenerator.js";
 import { asciiSymbols } from "../utils/dict.js";
+import generatePassphrase from "../components/password-generator/passphraseGenerator.js";
 
 // Password Tests
 /*
@@ -18,7 +19,6 @@ const specialChars = [...asciiSymbols.symbolChars].map((char) =>
 const uppercaseChars = [...asciiSymbols.upperChars].map((char) =>
   String.fromCharCode(char)
 );
-console.log(specialChars, uppercaseChars);
 
 describe("Password Generator: Tests generatePassword function - Positive Tests", function () {
   it("Creates a password of a given n length", function () {
@@ -63,5 +63,14 @@ describe("Password Generator: Tests generatePassword function - Positive Tests",
     expect(res)
       .to.include.oneOf(specialChars)
       .and.to.include.oneOf(uppercaseChars);
+  });
+});
+
+describe("Password Generator: Tests generatePassword function - Negative Tests", function () {
+  it("Will not accept a length < 5", function () {
+    expect(() => generatePassword(2, "-", false, false)).to.throw(
+      Error,
+      "Password length must be between 5 and 50 chars"
+    );
   });
 });

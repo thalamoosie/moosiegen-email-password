@@ -1,0 +1,26 @@
+{
+  "name": "m00sies-account-stuff",
+  "version": "1.0.0",
+  "description": "Email and Password Generator CLI tool in Node",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha ./tests/**/*.spec.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "chalk-animation": "^2.0.3",
+    "figlet": "^1.6.0",
+    "gradient-string": "^2.0.2",
+    "inquirer": "^9.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.2",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.1"
+  }
+}

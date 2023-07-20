@@ -59,14 +59,11 @@ const generatePassphrase = function (
     for (let i = 0; i < phraseLen; i++) {
       searchLetters.push(wordKeys[randomArrIndex(wordKeys)]);
     }
-    console.log(`Letters: `, searchLetters);
     // Find words randomly based on key using the searchLetters array:
     const phraseArray = Array.from(
       searchLetters,
       (key) => data[key]?.[randomArrIndex(data[key])]
     );
-
-    console.log(phraseArray);
 
     // for (const num of passwordValues) {
     //   phraseArray.push(data[num]);
@@ -85,9 +82,6 @@ const generatePassphrase = function (
       phraseArray[randomIndex] = capWord;
     }
     const finalPassphrase = phraseArray.join(delim);
-
-    console.log("FINAL PASSPHRASE");
-    console.log(finalPassphrase);
 
     return finalPassphrase;
   } catch (err) {

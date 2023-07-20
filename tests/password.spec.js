@@ -1,6 +1,7 @@
 import { assert, expect } from "chai";
 import generatePassword from "../components/password-generator/passwordGenerator.js";
 import { asciiSymbols } from "../utils/dict.js";
+import generatePassphrase from "../components/password-generator/passphraseGenerator.js";
 
 // Password Tests
 /*
@@ -18,38 +19,31 @@ const specialChars = [...asciiSymbols.symbolChars].map((char) =>
 const uppercaseChars = [...asciiSymbols.upperChars].map((char) =>
   String.fromCharCode(char)
 );
-console.log(specialChars, uppercaseChars);
 
 describe("Password Generator: Tests generatePassword function - Positive Tests", function () {
   it("Creates a password of a given n length", function () {
     const res = generatePassword(8, false, false, false);
-    console.log(`Password Generated: ${res}`);
     expect(res).to.have.lengthOf(8);
   });
   it("Generates a 5 character password by default if not given a length", function () {
     const res = generatePassword(undefined, false, false, false);
-    console.log(`Password Generated: ${res}`);
     expect(res).to.have.lengthOf(5);
   });
   it("returns type of string", function () {
     const res = generatePassword(8, false, true, false);
-    console.log(`Password Generated: ${res}`);
-    assert.typeOf(res, "string", "Password is a string");
+    expect(res).to.be.a("string");
   });
   it("includes at least 1 number if inclNumber = true", function () {
     const res = generatePassword(8, false, true, false);
-    console.log(`Password Generated: ${res}`);
     const num = /\d/.test(res);
-    assert.isTrue(num, "Password should include at least 1 number");
+    expect(num).to.be.true;
   });
   it("includes at least 1 special character if inclSymbol = true", function () {
     const res = generatePassword(8, false, false, true);
-    console.log(`Password Generated: ${res}`);
     expect(res).to.include.oneOf(specialChars);
   });
   it("includes at least 1 upper case character if inclUpper = true", function () {
     const res = generatePassword(8, true, false, true);
-    console.log(`Password Generated: ${res}`);
     expect(res).to.include.oneOf(
       uppercaseChars,
       "Includes at least 1 upperchase char"
@@ -57,11 +51,19 @@ describe("Password Generator: Tests generatePassword function - Positive Tests",
   });
   it("Includes all special options if all boolean params are true", function () {
     const res = generatePassword(10, true, true, true);
-    console.log(`Password Generated: ${res}`);
     const num = /\d/.test(res);
-    assert.isTrue(num);
+    expect(num).to.be.true;
     expect(res)
       .to.include.oneOf(specialChars)
       .and.to.include.oneOf(uppercaseChars);
+  });
+});
+
+describe("Password Generator: Tests generatePassword function - Negative Tests", function () {
+  it("Will not accept a length < 5", function () {
+    expect(() => generatePassword(2, "-", false, false)).to.throw(
+      Error,
+      "Password length must be between 5 and 50 chars"
+    );
   });
 });

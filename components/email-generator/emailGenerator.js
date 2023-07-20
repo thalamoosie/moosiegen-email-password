@@ -3,7 +3,7 @@
 // Object.defineProperty(exports, "__esModule", { value: true });
 import { assembleEmail, generateDate } from "./emailFunctions.js";
 
-const generateEmails = (userName) => {
+export const generateEmails = (userName) => {
   const date = new Date();
   const { thisMonth, todayDate, thisYear } = generateDate(date);
 
@@ -13,8 +13,6 @@ const generateEmails = (userName) => {
     defaultPassword: "TestingPW!",
   };
 
-  console.log(user);
-  console.log(thisMonth, todayDate, thisYear);
   let email = assembleEmail(
     user.userName,
     thisMonth,
@@ -23,7 +21,4 @@ const generateEmails = (userName) => {
     5,
     user.emailDomain
   );
-  console.log(typeof email);
 };
-
-export default generateEmails;

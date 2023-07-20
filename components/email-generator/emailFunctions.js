@@ -14,7 +14,8 @@ import { padTwoDigits } from "../../utils/utils.js";
  * @param id Identifier of an email address, if it is to be used for a specific purpose (ie: 'test' or 'trial')
  * @returns
  */
-const assembleEmail = function (
+
+export const assembleEmail = function (
   userName,
   month,
   day,
@@ -33,14 +34,13 @@ const assembleEmail = function (
           )}@${domain}`;
     emailArr.push(emailStr);
   }
-  console.log(`Emails Generated: `, emailArr);
+  // console.log(`Emails Generated: `, emailArr);
   return emailArr;
 };
-const generateDate = function (date) {
+
+export const generateDate = function (date) {
   const thisMonth = padTwoDigits(date.getMonth() + 1);
   const todayDate = padTwoDigits(date.getDate());
   const thisYear = date.getFullYear().toString();
   return { thisMonth, todayDate, thisYear };
 };
-
-export { assembleEmail, generateDate };

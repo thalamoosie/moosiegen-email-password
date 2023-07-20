@@ -18,41 +18,29 @@ import generatePassphrase from "../components/password-generator/passphraseGener
 
 describe("Passphrase Generator: Tests generatePassphrase function - Positive Tests", function () {
   it("Creates a passphrase of the desired length", function () {
-    const res = generatePassphrase(8);
-    console.log(`Passphrase Generated: ${res}`);
-    const split = res.split("-");
-    assert.equal(split.length, 8);
+    const res = generatePassphrase(8).split("-");
+    assert.equal(res.length, 8);
   });
 
   it("Returns type of: String", function () {
     const res = generatePassphrase(8);
-    console.log(`Passphrase Generated: ${res}`);
     assert.typeOf(res, "string");
   });
 
   it("Uses the delimiter passed in function parameters", function () {
     const res = generatePassphrase(8, ":", false, false);
-    console.log(`Passphrase Generated: ${res}`);
     const matches = res.match(/[^a-zA-Z0-9_]/g);
     assert.lengthOf(matches, 7);
     assert.equal(matches[0], ":");
   });
 
   it("capitalizes one word in the phrase if capitalize = true", function () {
-    const res = generatePassphrase(8, ".", false, true);
-    console.log(`Passphrase Generated: ${res}`);
-    const split = res.split(".");
-    const checkUppercase = split.some((str) => str === str.toUpperCase());
-    if (checkUppercase)
-      // Log the result to the console if split finds an uppercase word
-      console.log(
-        `Uppercase Word: ${split.find((str) => str === str.toUpperCase())}`
-      );
+    const res = generatePassphrase(8, ".", false, true).split(".");
+    const checkUppercase = res.some((str) => str === str.toUpperCase());
     assert.equal(checkUppercase, true);
   });
   it("swaps in other characters for a, s, e, t, i, o", function () {
     const res = generatePassphrase(8, ":", true, false);
-    console.log(`Passphrase Generated: ${res}`);
     const match = /[4@5371!0\$]/g.test(res);
     assert.isTrue(match);
   });

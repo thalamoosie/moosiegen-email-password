@@ -64,9 +64,21 @@ describe("Email Generator: assembleEmail - Positive Tests", function () {
       testUser.domain,
       testUser.id
     );
-    // expect(res[0]).to.equal("testuser+mz06.04.2023-01@testmoose.com");
     expect(res[0]).to.equal(
       `${testUser.userName}+${testUser.id}${testUser.month}.${testUser.day}.${testUser.year}-01@${testUser.domain}`
+    );
+  });
+  it("defaults to no identifier if left undefined", function () {
+    const res = assembleEmail(
+      testUser.userName,
+      testUser.month,
+      testUser.day,
+      testUser.year,
+      testUser.upperLimit,
+      testUser.domain
+    );
+    expect(res[0]).to.equal(
+      `${testUser.userName}+${testUser.month}.${testUser.day}.${testUser.year}-01@${testUser.domain}`
     );
   });
 });

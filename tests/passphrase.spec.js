@@ -2,19 +2,7 @@ import { assert, expect } from "chai";
 
 import generatePassphrase from "../components/password-generator/passphraseGenerator.js";
 
-// const countPassphraseStrings = function (inputString, delimiter) {
-//   const arr = inputString.split(delimiter);
-//   return arr.length;
-// };
-
 // Passphrase Generator Tests
-/*
-1. It should be a string
-2. It should be the correct length (between delimiters)
-3. The delimiter passed in param should be the delimiter in the final passphrase
-4. if Capitalize = true, should contain one word that is all toUpperCase()
-5. If Charswap = true, should swap all chars mapped in the leetSpeak object to chracters in passphrase
-*/
 
 describe("Passphrase Generator: Tests generatePassphrase function - Positive Tests", function () {
   it("Creates a passphrase of the desired length", function () {
@@ -45,12 +33,3 @@ describe("Passphrase Generator: Tests generatePassphrase function - Positive Tes
     assert.isTrue(match);
   });
 });
-
-// describe("Passphrase Generator: Tests generatePassphrase function - Negative Tests", function () {
-//   it("Creates a passphrase of the desired length", function () {
-//     const res = generatePassphrase(8);
-//     console.log(`Passphrase Generated: ${res}`);
-//     const split = res.split("-");
-//     assert.equal(split.length, 8);
-//   });
-// });

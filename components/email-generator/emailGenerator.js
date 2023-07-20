@@ -13,8 +13,6 @@ export const generateEmails = (userName) => {
     defaultPassword: "TestingPW!",
   };
 
-  // console.log(user);
-  // console.log(thisMonth, todayDate, thisYear);
   let email = assembleEmail(
     user.userName,
     thisMonth,

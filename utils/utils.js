@@ -43,18 +43,6 @@ function createUniqueValues(len, min, max) {
  */
 const padTwoDigits = (num) => num.toString().padStart(2, "0");
 
-// Creates a filename from a date
-/**
- *
- * @param file Name of file to have date appended to end
- * @param date Date object
- * @returns String formatted as such: filename-formattedISODate.extension
- */
-const filenameFromDate = function (file, date, extension) {
-  const formattedDate = date.toISOString().replace(/:|\./gi, "-");
-  return `${file}-${formattedDate}.${extension}`;
-};
-
 const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
 
 export {

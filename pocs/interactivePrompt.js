@@ -7,7 +7,6 @@ import figlet from "figlet";
 import chalkAnimation from "chalk-animation";
 import { createSpinner } from "nanospinner";
 import Table from "cli-table";
-import { table } from "console";
 
 let userName;
 const pver = `v1.0.0`;

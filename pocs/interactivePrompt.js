@@ -7,9 +7,16 @@ import figlet from "figlet";
 import chalkAnimation from "chalk-animation";
 import { createSpinner } from "nanospinner";
 import Table from "cli-table";
+import { getNiceAffirmation } from "../components/nice-things-api/niceThings.js";
 
-let userName;
+// import { boolean } from "yargs";
+
+// let userName;
 const pver = `v1.0.0`;
+
+const passphraseOptions = {};
+const userObject = {};
+const passwordOptions = {};
 
 // This isn't my moose. This will be rectified later.
 const asciiMoose = String.raw`
@@ -31,6 +38,8 @@ const mainMenuChoices = [
   "5. Help",
 ];
 
+const booleanChoices = ['Y', 'N'];
+
 const introMsg = "m00seg3n";
 
 const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
@@ -45,11 +54,15 @@ const generateFiglet = (text) => {
 
 const introScreen = async function () {
   try {
+
     const figletData = await generateFiglet(introMsg);
+
     console.log(gradient.pastel.multiline(figletData));
     console.log(gradient.pastel.multiline(asciiMoose));
     console.log(chalk.cyan(`\n Account Stuff Generator CLI Tool ${pver} `));
+
     await sleep();
+
   } catch (err) {
     console.error(`Error generating screen: ${err}`);
   }
@@ -99,7 +112,7 @@ const validateQty = async function (qty) {
 
 const handleEmailSelection = async function () {
   console.clear();
-  const userObject = {};
+
   console.log(`
   Generates ${chalk.italic(
     `n`
@@ -128,7 +141,7 @@ const handleEmailSelection = async function () {
     name: "bool_pw",
     type: "list",
     message: "Include a test password?",
-    choices: ["Y", "N"],
+    choices: booleanChoices
   });
 
   userObject.inclOptionalPassword = includePassword.bool_pw;
@@ -167,14 +180,99 @@ const handleEmailSelection = async function () {
 
 const handlePasswordSelection = async function () {
   // handle option 2
-  console.log("Password Gen!");
+
+
+  console.log("Random Password Gen Invocation!");
+  console.log("");
+  const passwordLength = await inquirer.prompt({
+    name: "password_length",
+    type: "input",
+    messasge: "Password length (5-50):",
+  });
+
+  passwordOptions.passwordLength = passwordLength.password_length;
+
+  console.log("Include any of the following optional parameters:")
+
+  const inclUppercase = await inquirer.prompt({
+    name: "inc_upper",
+    type: "list",
+    messasge: "Uppercase?",
+    choices: booleanChoices
+  });
+
+  passwordOptions.inclUpper = inclUppercase.inc_upper;
+
+  const inclNumber = await inquirer.prompt({
+    name: "inc_number",
+    type: "list",
+    message: "Number?",
+    choices: booleanChoices
+  });
+
+  passwordOptions.inclNumber = inclNumber.inc_number;
+
+  const inclSymbol = await inquirer.prompt({
+    name: "inc_symbol",
+    type: "list",
+    messasge: "Symbols?",
+    choices: booleanChoices
+  });
+
+  passwordOptions.inclSymbol = inclSymbol.inc_symbol;
+  console.log(passwordOptions);
+
 };
 
 const handlePassphraseSelection = async function () {
   // handle option 3
+  const passphraseLength = await inquirer.prompt({
+    name: "passphrase_length",
+    type: "input",
+    message:"Enter passphrase length (in words):"
+  });
+
+  passphraseOptions.passphraseLength = passphraseLength.passphrase_length;
+
+  const passphraseLeetSpeak = await inquirer.prompt({
+    name: "leet_speak",
+    type: "list",
+    message: "Swap some characters for symbols?",
+    choices: booleanChoices
+  })
+
+  passphraseOptions.leetSpeak = passphraseLeetSpeak.leet_speak;
+
+  const delimiterChoice = await inquirer.prompt({
+    name: "delimiter_choice",
+    type: "list",
+    message: "Choose a delimiter (default: '-'):",
+    choices: ['None', ':', '.', '_', '\\', '*', '%', '+', '=', '/', '#']
+
+  })
+  passphraseOptions.delimiter = delimiterChoice.delimiter_choice;
+
+  const capitalizeRandomWord = await inquirer.prompt({
+    name: "cap_word",
+    type: "list",
+    message: "Capitalize a random word?",
+    choices: booleanChoices
+  })
+
+  passphraseOptions.capitalizeWord = capitalizeRandomWord.cap_word;
+
+  console.log(passphraseOptions);
+
+
 };
 
 const handleNiceAPI = async function () {
+  const apiURL = 'https://www.affirmations.dev/'
+  console.log("Everyone can use a little well wishing, eh?\n")
+  const { affirmation } = await getNiceAffirmation(apiURL);
+  
+  sleep();
+  console.log(affirmation)
   // handle option 4
 };
 

@@ -39,7 +39,7 @@ const findCharsInFile = async (file, char) => {
 
       const multiString = `File ${file} has ${accumulator} occurences of the character ${char}`;
       const singleString = `File ${file} has ${accumulator} occurence of the character ${char}`;
-      
+
       if (accumulator <= 0) console.log(multiString);
       if (accumulator === 1) console.log(singleString);
       if (accumulator > 1) console.log(multiString);
